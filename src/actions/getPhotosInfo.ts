@@ -12,10 +12,6 @@ export async function getPhotosInfo() {
 
   const sortedPhotos = await db.query.photos.findMany({
     where: eq(photos.userId, session.user.id),
-    columns: {
-      buffer: false,
-      thumbnail: false,
-    },
     orderBy: desc(photos.created_at),
   });
 

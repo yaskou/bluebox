@@ -65,7 +65,7 @@ export default function PhotosViewer({ photosInfo }: Props) {
                           >
                             <img
                               className="object-cover min-w-full min-h-full"
-                              src={`/api/thumbnails/${photosInfo[index].id}`}
+                              src={`/api/contents/${photosInfo[index].id}?type=thumbnail`}
                               width={photoSize}
                               height={photoSize}
                             />
@@ -92,7 +92,7 @@ export default function PhotosViewer({ photosInfo }: Props) {
             <div className="size-full flex justify-center items-center overflow-hidden">
               <img
                 className="size-full object-contain"
-                src={`/api/photos/${selectedPhoto.id}`}
+                src={`/api/contents/${selectedPhoto.id}`}
               />
             </div>
             <DialogFooter className="flex justify-center">
