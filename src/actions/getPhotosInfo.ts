@@ -17,3 +17,15 @@ export async function getPhotosInfo() {
 
   return sortedPhotos;
 }
+
+export async function getPhotoInfo(photoId: string) {
+  const session = await auth();
+
+  if (!session) return;
+
+  const photo = await db.query.photos.findFirst({
+    where: eq(photos.id, photoId),
+  });
+
+  return photo;
+}
