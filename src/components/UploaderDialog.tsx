@@ -28,7 +28,7 @@ export default function UploaderDialog() {
     if (!photos.length) return; // 写真がなければ
 
     for (const [count, photo] of photos.entries()) {
-      await uploadPhoto(photo); // サーバー側の処理が終わるまで待つ
+      await uploadPhoto(photo, new Date(photo.lastModified)); // サーバー側の処理が終わるまで待つ
       setProportionUploaded(((count + 1) / photos.length) * 100); // 全体の何パーセントアップロードされたか
     }
 
@@ -54,7 +54,7 @@ export default function UploaderDialog() {
             id="photos"
             name="photos"
             type="file"
-            accept="image/*"
+            accept="image/*, video/mp4"
             multiple
           />
           <section className="flex gap-2 items-center">

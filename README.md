@@ -32,3 +32,4 @@ npx drizzle-kit migrate
 ```
 CONTENTS_DIR="画像の保存先"
 ```
+### 5. [ffmpeg](https://ffmpeg.org/download.html)のインストール

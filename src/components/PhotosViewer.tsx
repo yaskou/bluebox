@@ -45,7 +45,7 @@ export default function PhotosViewer({ photosInfo }: Props) {
                         <Link href={`/box/${photosInfo[index].id}`}>
                           <img
                             className="object-cover min-w-full min-h-full"
-                            src={`/api/contents/${photosInfo[index].id}?type=thumbnail`}
+                            src={`/api/images/${photosInfo[index].id}?type=thumbnail`}
                             width={photoSize}
                             height={photoSize}
                           />
