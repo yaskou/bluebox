@@ -1,3 +1,5 @@
+"use client";
+
 import { deletePhoto } from "@/actions/deletePhoto";
 import {
   AlertDialog,
