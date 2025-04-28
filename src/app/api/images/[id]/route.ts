@@ -7,19 +7,18 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> },
 ) {
   const id = (await params).id; // URLから画像のIDを取得
-  let contentPath = path.join(process.env.CONTENTS_DIR!, id);
+  const searchParams = request.nextUrl.searchParams;
+  const type = searchParams.get("type");
+  const contentPath = path.join(
+    process.env.CONTENTS_DIR!,
+    type === "thumbnail" ? "thumbnails" : "",
+    id,
+  ); // サムネイルのパスに変更
 
   if (!fs.existsSync(contentPath)) {
     return new Response("Not Found", {
       status: 404,
     });
-  }
-
-  const searchParams = request.nextUrl.searchParams;
-  const type = searchParams.get("type");
-
-  if (type === "thumbnail") {
-    contentPath = path.join(process.env.CONTENTS_DIR!, "thumbnails", id); // サムネイルのパスに変更
   }
 
   const buffer = fs.readFileSync(contentPath);

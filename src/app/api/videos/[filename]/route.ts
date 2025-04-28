@@ -2,6 +2,11 @@ import fs from "fs";
 import { NextRequest } from "next/server";
 import path from "path";
 
+function fileExtensionToMimeType(fileExtension: string) {
+  if (fileExtension === ".m3u8") return "application/x-mpegURL";
+  if (fileExtension === ".ts") return "video/mp2t";
+}
+
 export async function GET(
   request: NextRequest,
   {
@@ -13,7 +18,7 @@ export async function GET(
   const { filename } = await params;
   const idLength = 38; // v_含む動画のIDの文字数
   const id = filename.slice(0, idLength);
-  const fileExtension = filename.slice(filename.lastIndexOf(".") + 1); // ファイルの拡張子を取得
+  const fileExtension = filename.slice(filename.lastIndexOf(".")); // ファイルの拡張子を取得
   const contentPath = path.join(process.env.CONTENTS_DIR!, id, filename);
 
   if (!fs.existsSync(contentPath)) {
@@ -23,20 +28,8 @@ export async function GET(
   }
 
   const buffer = fs.readFileSync(contentPath);
-
-  let mimeType = "";
-  switch (
-    fileExtension // mimetypeを指定
-  ) {
-    case "m3u8":
-      mimeType = "application/x-mpegURL";
-      break;
-    case "ts":
-      mimeType = "video/mp2t";
-      break;
-    default:
-      break;
-  }
+  const mimeType = fileExtensionToMimeType(fileExtension);
+  if (!mimeType) return;
 
   return new Response(buffer, {
     headers: {
