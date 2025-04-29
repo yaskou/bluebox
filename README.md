@@ -12,6 +12,7 @@ npm install
 ```
 AUTH_GOOGLE_ID="クライアントID"
 AUTH_GOOGLE_SECRET="クライアントシークレット"
+AUTH_TRUST_HOST=true
 ```
 3. シークレットキーの生成
 ```bash
